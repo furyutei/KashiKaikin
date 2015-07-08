@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.1
+// @version         0.1.0.2
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -50,6 +50,7 @@ var GLOBAL_OPTIONS = {
     ,   '-webkit-user-select' : 'text'
     ,   '-moz-user-select' : 'text'
     ,   '-ms-user-select' : 'text'
+    ,   '-khtml-user-select' : 'text'
     ,   'user-select' : 'text'
     }
 };
@@ -224,6 +225,22 @@ var site_infomations = [
             $('div.lyric__body').before(elm);
             
             $('body,div.lyricBody').css(global_options.CSS_ENABLE_SELECTION);
+        }
+    }
+
+,   { // ■ 歌詞タイム
+        reg_url : '^https?://www\.kasi-time\.com/.+'
+    ,   sample_url : 'http://www.kasi-time.com/item-75786.html'
+    ,   options : {
+            jquery : false
+        }
+    ,   main : function(w, d, global_options, options) {
+            $('body,div#lyrics').css(global_options.CSS_ENABLE_SELECTION);
+            var enable_selection = function() {
+                $(d.body).unbind('copy contextmenu selectstart');
+            };
+            
+            setInterval(enable_selection, 1000); // 一回だけだとタイミングによっては無効化されてしまう
         }
     }
 

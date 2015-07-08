@@ -12,6 +12,12 @@ KashiKaikin
 このスクリプトは、いくつかの歌詞検索サイトにて、歌詞テキストのコピーを可能にするものです。  
 
 
+■ 注意事項
+---
+**歌詞の利用については、著作権法や各サービスの利用規約等に基づいた適切な範囲内で行ってください。**  
+**本スクリプトを使用した結果については、作者は一切の責任を負いません。**  
+
+
 ■ インストール方法
 ---
 [Greasemonkey](https://addons.mozilla.org/ja/firefox/addon/greasemonkey/)を入れたFirefox、もしくは[Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=ja)を入れたGoogle Chromeにて、  
@@ -25,7 +31,7 @@ KashiKaikin
 ---
 対応しているサービスにて歌詞を表示すると、歌詞テキストが選択・コピー可能となります。  
 
-※ 2015.07.07 現在の対応サービス  
+※ 2015.07.08 現在の対応サービス  
 - [歌詞検索サービス　歌ネット](http://www.uta-net.com/)  
 - [うたまっぷ 歌詞を無料で検索表示](http://www.utamap.com/)  
 - [歌詞検索サービス 歌詞ＧＥＴ](http://www.kget.jp/)  
@@ -34,12 +40,7 @@ KashiKaikin
 - [JOYSOUND.com](https://www.joysound.com/web/)  
 - [J-Total Music!](http://music.j-total.net/)  
 - [UtaTen 無料歌詞検索サイトの決定版！うたてん](http://utaten.com/)  
-
-
-■ 注意事項
----
-**歌詞の利用については、著作権法や各サービスの利用規約等に基づいた適切な範囲内で行ってください。**  
-**本スクリプトを使用した結果については、作者は一切の責任を負いません。**  
+- [歌詞タイム](http://www.kasi-time.com/)  
 
 
 ■ 関連記事

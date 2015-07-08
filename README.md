@@ -41,6 +41,8 @@ KashiKaikin
 - [J-Total Music!](http://music.j-total.net/)  
 - [UtaTen 無料歌詞検索サイトの決定版！うたてん](http://utaten.com/)  
 - [歌詞タイム](http://www.kasi-time.com/)  
+- [歌詞サーチ](http://kashisearch.jp/)  
+- [楽器.me](http://gakufu.gakki.me/)
 
 
 ■ 関連記事

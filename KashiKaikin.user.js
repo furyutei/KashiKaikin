@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.2
+// @version         0.1.0.3
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -58,7 +58,7 @@ var GLOBAL_OPTIONS = {
 if ((w !== w.parent) || d.getElementById(('__user_script__' + GLOBAL_OPTIONS.NAME_SCRIPT))) {return;}
 
 var site_infomations = [
-    { // ■ 歌詞検索サービス　歌ネット
+    { // ■ [歌詞検索サービス　歌ネット](http://www.uta-net.com/)
         reg_url : '^https?://(?:www\\.)?uta-net\\.com/song/[^/]+/'
     ,   sample_url : 'http://www.uta-net.com/song/185828/'
     ,   options : {
@@ -78,14 +78,16 @@ var site_infomations = [
                 },
                 'xml'
             );
+            
             var enable_selection = function() {
                 $(d.body).unbind('contextmenu');
             };
+            
             setInterval(enable_selection, 1000); // 一回だけだとタイミングによっては無効化されてしまう
         }
     }
 
-,   { // ■ うたまっぷ 歌詞を無料で検索表示
+,   { // ■ [うたまっぷ 歌詞を無料で検索表示](http://www.utamap.com/)
         reg_url : '^https?://(?:(?:kids|www)\\.)?utamap\\.com/(?:pc/)?(?:show|view)kasi(?:_pc)?\\.php\\?surl=.+'
     ,   sample_url : 'http://www.utamap.com/showkasi.php?surl=k-150520-218'
     ,   options : {
@@ -115,7 +117,7 @@ var site_infomations = [
         }
     }
 
-,   { // ■ 歌詞検索サービス 歌詞ＧＥＴ
+,   { // ■ [歌詞検索サービス 歌詞ＧＥＴ](http://www.kget.jp/)
         reg_url : '^https?://www\\.kget\\.jp/lyric/[^/]+/'
     ,   sample_url : 'http://www.kget.jp/lyric/217912/'
     ,   options : {
@@ -125,7 +127,7 @@ var site_infomations = [
         }
     }
 
-,   { // ■ 歌詞ナビ 無料歌詞検索サービス
+,   { // ■ [歌詞ナビ 無料歌詞検索サービス](http://kashinavi.com/)
         reg_url : '^https?://kashinavi\\.com/song_view\\.html\?.+'
     ,   sample_url : 'http://kashinavi.com/song_view.html?86577'
     ,   options : {
@@ -149,7 +151,7 @@ var site_infomations = [
         }
     }
 
-,   { // ■ 歌詞検索J-Lyric.net
+,   { // ■ [歌詞検索J-Lyric.net](http://j-lyric.net/)
         reg_url : '^https?://j-lyric\\.net/artist/[^/]+/[^.]+.html'
     ,   sample_url : 'http://j-lyric.net/artist/a05a05d/l035fb5.html'
     ,   options : {
@@ -159,7 +161,7 @@ var site_infomations = [
         }
     }
 
-,   { // ■ JOYSOUND.com
+,   { // ■ [JOYSOUND.com](https://www.joysound.com/web/)
         reg_url : '^https?://www\\.joysound\\.com/web/search/song/.+'
     ,   sample_url : 'https://www.joysound.com/web/search/song/420767#lyrics'
     ,   options : {
@@ -192,7 +194,7 @@ var site_infomations = [
         }
     }
 
-,   { // ■ J-Total Music!
+,   { // ■ [J-Total Music!](http://music.j-total.net/)
         reg_url : '^https?://music\\.j-total\\.net/data/.+'
     ,   sample_url : 'http://music.j-total.net/data/021na/001_nagabuchi_tsuyoshi/005.html'
     ,   options : {
@@ -211,7 +213,7 @@ var site_infomations = [
         }
     }
 
-,   { // ■ UtaTen 無料歌詞検索サイトの決定版！うたてん
+,   { // ■ [UtaTen 無料歌詞検索サイトの決定版！うたてん](http://utaten.com/)
         reg_url : '^https?://utaten\\.com/lyric/.+'
     ,   sample_url : 'http://utaten.com/lyric/%E5%8C%97%E5%AE%87%E6%B2%BB%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88/%E3%83%88%E3%82%A5%E3%83%83%E3%83%86%E3%82%A3%EF%BC%81/'
     ,   options : {
@@ -228,14 +230,15 @@ var site_infomations = [
         }
     }
 
-,   { // ■ 歌詞タイム
-        reg_url : '^https?://www\.kasi-time\.com/.+'
+,   { // ■ [歌詞タイム](http://www.kasi-time.com/)
+        reg_url : '^https?://www\\.kasi-time\\.com/.+'
     ,   sample_url : 'http://www.kasi-time.com/item-75786.html'
     ,   options : {
             jquery : false
         }
     ,   main : function(w, d, global_options, options) {
             $('body,div#lyrics').css(global_options.CSS_ENABLE_SELECTION);
+            
             var enable_selection = function() {
                 $(d.body).unbind('copy contextmenu selectstart');
             };
@@ -243,6 +246,44 @@ var site_infomations = [
             setInterval(enable_selection, 1000); // 一回だけだとタイミングによっては無効化されてしまう
         }
     }
+
+,   { // ■ [歌詞サーチ](http://kashisearch.jp/)
+        reg_url : '^https?://kashisearch\\.jp/lyrics/.+'
+    ,   sample_url : 'http://kashisearch.jp/lyrics/861454'
+    ,   options : {
+            jquery : false
+        }
+    ,   main : function(w, d, global_options, options) {
+            $('body').css(global_options.CSS_ENABLE_SELECTION);
+            
+            $.post(
+                'http://kashisearch.jp/api/lyrics',
+                {
+                    id : w.location.href.match(/\/lyrics\/([^\/?#]+)/)[1]
+                },
+                function(json){
+                    var elm = $('<pre/>');
+                    elm.text(json.words).css(global_options.CSS_KASHI);
+                    $('object#words').before(elm);
+                },
+                'json'
+            );
+        }
+    }
+
+,   { // ■ [楽器.me](http://gakufu.gakki.me/)
+        reg_url : '^https?://gakufu\\.gakki\\.me/m/data/.*'
+    ,   sample_url : 'http://gakufu.gakki.me/m/data/N04271.html'
+    ,   options : {
+            jquery : false
+        }
+    ,   main : function(w, d, global_options, options) {
+            d.body.oncopy = d.body.onkeydown = function() {
+                return true;
+            };
+        }
+    }
+
 
 /* // 雛形
 ,   { // ■

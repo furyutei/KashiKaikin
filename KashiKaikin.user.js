@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.0
+// @version         0.1.0.1
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -36,14 +36,21 @@ THE SOFTWARE.
 
 var GLOBAL_OPTIONS = {
     NAME_SCRIPT : 'KashiKaikin'
-,   DEBUG : true
-,   KASHI_CSS : {
+,   DEBUG : false
+,   CSS_KASHI : {
         'border' :'double 3px orange'
     ,   'padding' : '4px 6px'
     ,   'text-align' : 'left'
     ,   'line-height' : '1.4'
     ,   'font-size' : '14px'
     ,   'font-family' : '"Hiragino Kaku Gothic ProN", Meiryo, sans-serif, monospace'
+    }
+,   CSS_ENABLE_SELECTION : {
+        '-webkit-touch-callout' : 'default'
+    ,   '-webkit-user-select' : 'text'
+    ,   '-moz-user-select' : 'text'
+    ,   '-ms-user-select' : 'text'
+    ,   'user-select' : 'text'
     }
 };
 
@@ -65,12 +72,15 @@ var site_infomations = [
                     $(xml).find('text').each(function() {
                         chunks.push($(this).text());
                     });
-                    elm.text(chunks.join('\n')).css(global_options.KASHI_CSS);
+                    elm.text(chunks.join('\n')).css(global_options.CSS_KASHI);
                     $('p#flash_area').before(elm);
                 },
                 'xml'
             );
-            $('body').unbind('contextmenu');
+            var enable_selection = function() {
+                $(d.body).unbind('contextmenu');
+            };
+            setInterval(enable_selection, 1000); // 一回だけだとタイミングによっては無効化されてしまう
         }
     }
 
@@ -96,7 +106,7 @@ var site_infomations = [
                             return m;
                         }
                     );
-                    elm.text(chunks.join('\n')).css(global_options.KASHI_CSS);
+                    elm.text(chunks.join('\n')).css(global_options.CSS_KASHI);
                     $('canvas#canvas2,object#showkasi').before(elm);
                 },
                 'html'
@@ -111,12 +121,6 @@ var site_infomations = [
             jquery : false
         }
     ,   main : function(w, d, global_options, options) {
-            d.body.onselectstart = function() {
-               return true;
-            };
-            d.body.oncontextmenu = function() {
-               return true;
-            };
         }
     }
 
@@ -136,7 +140,7 @@ var site_infomations = [
                 },
                 function(result) {
                     var elm = $('<pre/>');
-                    elm.text(result.replace(/^kashi=.*?\n+/,'')).css(global_options.KASHI_CSS);
+                    elm.text(result.replace(/^kashi=.*?\n+/,'')).css(global_options.CSS_KASHI);
                     $('object#aaa').before(elm);
                 },
                 'html'
@@ -151,12 +155,6 @@ var site_infomations = [
             jquery : true
         }
     ,   main : function(w, d, global_options, options) {
-            d.body.onselectstart = function() {
-               return true;
-            };
-            d.body.oncontextmenu = function() {
-               return true;
-            };
         }
     }
 
@@ -167,21 +165,12 @@ var site_infomations = [
             jquery : true
         }
     ,   main : function(w, d, global_options, options) {
-            $(d.body).css({
-                '-webkit-touch-callout' : 'default'
-            ,   '-webkit-user-select' : 'text'
-            ,   '-moz-user-select' : 'text'
-            ,   '-ms-user-select' : 'text'
-            ,   'user-select' : 'text'
-            });
+            $(d.body).css(global_options.CSS_ENABLE_SELECTION);
             
             var enable_selection = function() {
                 //$(d.body).attr('onselectstart', 'return true').attr('oncontextmenu', 'return true');
-                d.body.onselectstart = function() {
-                   return true;
-                };
-                d.body.oncontextmenu = function() {
-                   return true;
+                d.oncontextmenu = d.body.oncontextmenu = d.body.onselectstart = function() {
+                    return true;
                 };
             };
             
@@ -189,11 +178,12 @@ var site_infomations = [
             //enable_selection();
             //
             //new MutationObserver(function(records) {
+            //    // 属性変化を監視して必要な時だけ enable_selection() をコールする試み→失敗
             //    enable_selection();
             //}).observe(d.body, {
             //    attributes : true
-            //,   characterData : true
-            //,   childList : true
+            //,   characterData : false
+            //,   childList : false
             //});
             */
             
@@ -205,15 +195,18 @@ var site_infomations = [
         reg_url : '^https?://music\\.j-total\\.net/data/.+'
     ,   sample_url : 'http://music.j-total.net/data/021na/001_nagabuchi_tsuyoshi/005.html'
     ,   options : {
-            jquery : false
+            jquery : true
         }
     ,   main : function(w, d, global_options, options) {
-            d.body.onselectstart = function() {
-               return true;
-            };
-            d.oncontextmenu = d.body.oncontextmenu = function() {
-               return true;
-            };
+            /*
+            //// コピー用に、歌詞中のコード部分を除いたものを貼り付け → コード部分の '/' がうまく除去できないので保留
+            //var lyric_body = $('table[align="center"] tt').clone(true), elm = $('<pre/>');
+            //lyric_body.find('a').remove();
+            //elm.text($.trim(lyric_body.text().replace(/(?:^ +| +$)/gm, ''))).css(global_options.CSS_KASHI);
+            //$('table[align="center"] tt').before(elm);
+            */
+            
+            $('body,div.lyricBody').css(global_options.CSS_ENABLE_SELECTION);
         }
     }
 
@@ -224,19 +217,13 @@ var site_infomations = [
             jquery : true
         }
     ,   main : function(w, d, global_options, options) {
-            $('body,div.lyricBody').css({
-                '-webkit-touch-callout' : 'default'
-            ,   '-webkit-user-select' : 'text'
-            ,   '-moz-user-select' : 'text'
-            ,   '-ms-user-select' : 'text'
-            ,   'user-select' : 'text'
-            });
-            d.body.onselectstart = function() {
-               return true;
-            };
-            d.body.oncontextmenu = function() {
-               return true;
-            };
+            // コピー用に、歌詞中のふりがなを除いたものを貼り付け
+            var lyric_body = $('div.lyricBody div.medium').clone(true), elm = $('<pre/>');
+            lyric_body.find('span.rt').remove();
+            elm.text($.trim(lyric_body.text().replace(/(?:^ +| +$)/gm, ''))).css(global_options.CSS_KASHI);
+            $('div.lyric__body').before(elm);
+            
+            $('body,div.lyricBody').css(global_options.CSS_ENABLE_SELECTION);
         }
     }
 
@@ -263,21 +250,35 @@ var call_main = function(w, d, main, global_options, options) {
         return ($ && $.fn && $.fn.jquery);
     };  //  end of is_jquery_valid
     
-    if (!options.jquery || is_jquery_valid()) {
+    var do_main = function() {
+        if (global_options.DEBUG || options.DEBUG) {
+            console.log(global_options.NAME_SCRIPT + ': ' + w.location.href);
+        }
         main(w, d, global_options, options);
+    };
+    
+    if (!options.jquery || is_jquery_valid()) {
+        do_main();
         return;
     }
     
     var check = function() {
         var $ = w.$;
         if (is_jquery_valid()) {
-            main(w, d, global_options, options);
+            do_main();
             return;
         }
         setTimeout(check, 100);
     };
     check();
 };  //  end of call_main()
+
+
+var common_enable_selection = function() {
+    d.oncontextmenu = d.body.oncontextmenu = d.body.onselectstart = function() {
+        return true;
+    };
+}; // end of common_enable_selection()
 
 
 var load_script = function(script_url, main, options, script_id) {
@@ -289,6 +290,9 @@ var load_script = function(script_url, main, options, script_id) {
         if (!options) {options = {};}
         if (options.jquery) {
             load_script('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js');
+        }
+        if (!options.suppress_common_procedure) {
+            common_enable_selection();
         }
         script.textContent = '(' + call_main.toString() + ')(' + [
             'window', 'document', main.toString(), JSON.stringify(GLOBAL_OPTIONS), JSON.stringify(options)

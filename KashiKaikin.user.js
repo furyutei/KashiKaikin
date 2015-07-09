@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.3
+// @version         0.1.0.4
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -284,6 +284,35 @@ var site_infomations = [
         }
     }
 
+,   { // ■ [プチリリ - 歌詞投稿コミュニティ](http://petitlyrics.com/)
+        reg_url : '^http://petitlyrics\\.com/lyrics/.+'
+    ,   sample_url : 'http://petitlyrics.com/lyrics/1119788'
+    ,   options : {
+            jquery : false
+        }
+    ,   main : function(w, d, global_options, options) {
+            var elm = $('<pre/>');
+            elm.text($('canvas#lyrics').text()).css(global_options.CSS_KASHI);
+            $('canvas#lyrics').before(elm);
+        }
+    }
+
+,   { // ■ [musiXmatch - 世界最大の歌詞カタログ](https://www.musixmatch.com/ja)
+        reg_url : '^https?://www\\.musixmatch\\.com/(?:[^/]{2}/)?lyrics/[^/]+/[^/]+'
+    ,   sample_url : 'https://www.musixmatch.com/ja/lyrics/%E5%8C%97%E5%AE%87%E6%B2%BB%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88/%E3%83%88%E3%82%A5%E3%83%83%E3%83%86%E3%82%A3'
+    ,   options : {
+            jquery : false
+        }
+    ,   main : function(w, d, global_options, options) {
+            var enable_selection = function() {
+                d.oncontextmenu = d.body.oncontextmenu = d.body.onselectstart = function() {
+                    return true;
+                };
+            };
+            
+            setInterval(enable_selection, 1000); // 一回だけだとタイミングによっては無効化されてしまう
+        }
+    }
 
 /* // 雛形
 ,   { // ■

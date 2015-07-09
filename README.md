@@ -31,7 +31,7 @@ KashiKaikin
 ---
 対応しているサービスにて歌詞を表示すると、歌詞テキストが選択・コピー可能となります。  
 
-※ 2015.07.08 現在の対応サービス  
+※ 2015.07.09 現在の対応サービス  
 - [歌詞検索サービス　歌ネット](http://www.uta-net.com/)  
 - [うたまっぷ 歌詞を無料で検索表示](http://www.utamap.com/)  
 - [歌詞検索サービス 歌詞ＧＥＴ](http://www.kget.jp/)  
@@ -43,6 +43,8 @@ KashiKaikin
 - [歌詞タイム](http://www.kasi-time.com/)  
 - [歌詞サーチ 視聴や動画が見られる無料歌詞検索サービス](http://kashisearch.jp/)  
 - [無料国内最大級の歌詞/コード検索サイト｜楽器.me](http://gakufu.gakki.me/)
+- [プチリリ - 歌詞投稿コミュニティ](http://petitlyrics.com/)
+- [musiXmatch - 世界最大の歌詞カタログ](https://www.musixmatch.com/ja)
 
 
 ■ 関連記事

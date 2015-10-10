@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.4
+// @version         0.1.0.5
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -288,12 +288,31 @@ var site_infomations = [
         reg_url : '^http://petitlyrics\\.com/lyrics/.+'
     ,   sample_url : 'http://petitlyrics.com/lyrics/1119788'
     ,   options : {
-            jquery : false
+            jquery : true
         }
     ,   main : function(w, d, global_options, options) {
-            var elm = $('<pre/>');
-            elm.text($('canvas#lyrics').text()).css(global_options.CSS_KASHI);
-            $('canvas#lyrics').before(elm);
+            /*
+            //var elm = $('<pre/>');
+            //elm.text($('canvas#lyrics').text()).css(global_options.CSS_KASHI);
+            //$('canvas#lyrics').before(elm);
+            */
+            $.post(
+                '/com/get_lyrics.ajax',
+                {
+                    lyrics_id : w.location.href.match(/\/lyrics\/([^\/?#]+)/)[1]
+                },
+                function( encoded_lyrics_infos ) {
+                    var lyrics = [];
+                    
+                    $.each( encoded_lyrics_infos, function( index, encoded_lyrics_info ) {
+                        lyrics.push( Base64.decode( encoded_lyrics_info.lyrics ) );
+                    } );
+                    var elm = $('<pre/>');
+                    elm.text( lyrics.join( '\n' ) ).css( global_options.CSS_KASHI );
+                    $( 'canvas#lyrics' ).before( elm );
+                },
+                'json'
+            );
         }
     }
 

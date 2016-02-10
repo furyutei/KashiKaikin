@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.5
+// @version         0.1.0.6
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -256,17 +256,36 @@ var site_infomations = [
     ,   main : function(w, d, global_options, options) {
             $('body').css(global_options.CSS_ENABLE_SELECTION);
             
-            $.post(
-                'http://kashisearch.jp/api/lyrics',
+            /*
+            //$.post(
+            //    'http://kashisearch.jp/api/lyrics',
+            //    {
+            //        id : w.location.href.match(/\/lyrics\/([^\/?#]+)/)[1]
+            //    },
+            //    function(json){
+            //        var elm = $('<pre/>');
+            //        elm.text(json.words).css(global_options.CSS_KASHI);
+            //        $('object#words').before(elm);
+            //    },
+            //    'json'
+            //);
+            */
+            $.get(
+                'http://kashisearch.jp/svg',
                 {
                     id : w.location.href.match(/\/lyrics\/([^\/?#]+)/)[1]
                 },
-                function(json){
-                    var elm = $('<pre/>');
-                    elm.text(json.words).css(global_options.CSS_KASHI);
-                    $('object#words').before(elm);
+                function( xml ) {
+                    var chunks = [],
+                        elm = $( '<pre/>' );
+                    
+                    $( xml ).find('text').each( function() {
+                        chunks.push($(this).text());
+                    } );
+                    elm.text( chunks.join( '\n' ) ).css( global_options.CSS_KASHI );
+                    $( '#svg_kashi' ).before( elm ).parent().css( 'height', 'auto' );
                 },
-                'json'
+                'xml'
             );
         }
     }

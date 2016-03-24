@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.6
+// @version         0.1.0.7
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -135,19 +135,31 @@ var site_infomations = [
         }
     ,   main : function(w, d, global_options, options) {
             var $ = w.$;
-            $.post(
-                'http://kashinavi.com/cgi-bin/kashi.cgi',
-                {
-                    kdifoe88: 'smx;paa',
-                    file_no: $('link[rel="canonical"]:first').attr('href').match(/\/song_view\.html\?(\d+)/)[1]
-                },
-                function(result) {
-                    var elm = $('<pre/>');
-                    elm.text(result.replace(/^kashi=.*?\n+/,'')).css(global_options.CSS_KASHI);
-                    $('object#aaa').before(elm);
-                },
-                'html'
-            );
+            /*
+            //$.post(
+            //    'http://kashinavi.com/cgi-bin/kashi.cgi',
+            //    {
+            //        kdifoe88: 'smx;paa',
+            //        file_no: $('link[rel="canonical"]:first').attr('href').match(/\/song_view\.html\?(\d+)/)[1]
+            //    },
+            //    function(result) {
+            //        var elm = $('<pre/>');
+            //        elm.text(result.replace(/^kashi=.*?\n+/,'')).css(global_options.CSS_KASHI);
+            //        $('object#aaa').before(elm);
+            //    },
+            //    'html'
+            //);
+            */
+            $( d.body ).css( global_options.CSS_ENABLE_SELECTION );
+            
+            var enable_selection = function() {
+                $( '*[oncopy]').removeAttr('oncopy' );
+                $( '*[onselectstart]').removeAttr( 'onselectstart' );
+                $( '*[oncontextmenu]').removeAttr( 'oncontextmenu' );
+                $( '*[unselectable]').removeAttr( 'unselectable' );
+            };
+            
+            enable_selection();
         }
     }
 

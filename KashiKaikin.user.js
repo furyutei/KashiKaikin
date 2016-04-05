@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.7
+// @version         0.1.0.8
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -80,7 +80,7 @@ var site_infomations = [
             );
             
             var enable_selection = function() {
-                $(d.body).unbind('contextmenu');
+                $(d.body).unbind('contextmenu copy cut selectstart');
             };
             
             setInterval(enable_selection, 1000); // 一回だけだとタイミングによっては無効化されてしまう

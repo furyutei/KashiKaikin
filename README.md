@@ -41,7 +41,7 @@ KashiKaikin
 - [コード譜と歌詞の無料検索サービス！ J-Total Music](http://music.j-total.net/)  
 - [UtaTen 無料歌詞検索サイトの決定版！うたてん](http://utaten.com/)  
 - [歌詞タイム](http://www.kasi-time.com/)  
-- [歌詞サーチ 視聴や動画が見られる無料歌詞検索サービス](http://kashisearch.jp/)  
+- ~~[歌詞サーチ 視聴や動画が見られる無料歌詞検索サービス](http://kashisearch.jp/)~~  
 - [無料国内最大級の歌詞/コード検索サイト｜楽器.me](http://gakufu.gakki.me/)
 - [プチリリ - 歌詞投稿コミュニティ](http://petitlyrics.com/)
 - [musiXmatch - 世界最大の歌詞カタログ](https://www.musixmatch.com/ja)

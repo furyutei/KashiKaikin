@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.8
+// @version         0.1.0.9
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -59,7 +59,7 @@ if ((w !== w.parent) || d.getElementById(('__user_script__' + GLOBAL_OPTIONS.NAM
 
 var site_infomations = [
     { // ■ [歌詞検索サービス　歌ネット](http://www.uta-net.com/)
-        reg_url : '^https?://(?:www\\.)?uta-net\\.com/song/[^/]+/'
+        reg_url : '^https?://(?:www\\.)?uta-net\\.com/(?:song|movie)/[^/]+/'
     ,   sample_url : 'http://www.uta-net.com/song/185828/'
     ,   options : {
             jquery : false
@@ -81,6 +81,7 @@ var site_infomations = [
             
             var enable_selection = function() {
                 $(d.body).unbind('contextmenu copy cut selectstart');
+                $('#over_flash').css({'pointer-events':'none'});
             };
             
             setInterval(enable_selection, 1000); // 一回だけだとタイミングによっては無効化されてしまう

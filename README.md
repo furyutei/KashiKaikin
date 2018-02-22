@@ -22,7 +22,7 @@ KashiKaikin
 ---
 [Greasemonkey](https://addons.mozilla.org/ja/firefox/addon/greasemonkey/)を入れたFirefox、もしくは[Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=ja)を入れたGoogle Chromeにて、  
 
-> [KashiKaikin.user.js](https://github.com/furyutei/KashiKaikin/raw/master/KashiKaikin.user.js)  
+> [KashiKaikin.user.js](https://furyu.atnifty.com/userjs/furyutei/KashiKaikin.user.js)  
 
 をクリックし、指示に従ってインストール。  
 

@@ -20,9 +20,9 @@ KashiKaikin
 
 ■ インストール方法
 ---
-[Greasemonkey](https://addons.mozilla.org/ja/firefox/addon/greasemonkey/)を入れたFirefox、もしくは[Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=ja)を入れたGoogle Chromeにて、  
+[Tampermonkey](http://tampermonkey.net/)を入れたブラウザで、  
 
-> [KashiKaikin.user.js](https://furyu.atnifty.com/userjs/furyutei/KashiKaikin.user.js)  
+> [KashiKaikin.user.js](https://furyutei.github.io/KashiKaikin/KashiKaikin.user.js)  
 
 をクリックし、指示に従ってインストール。  
 
@@ -31,7 +31,7 @@ KashiKaikin
 ---
 対応しているサービスにて歌詞を表示すると、歌詞テキストが選択・コピー可能となります。  
 
-※ 2015.07.09 現在の対応サービス  
+※ 2018.06.09 現在の対応サービス  
 - [歌詞検索サービス　歌ネット](http://www.uta-net.com/)  
 - [うたまっぷ 歌詞を無料で検索表示](http://www.utamap.com/)  
 - [歌詞検索サービス 歌詞ＧＥＴ](http://www.kget.jp/)  
@@ -50,3 +50,4 @@ KashiKaikin
 ■ 関連記事
 ---
 - [歌詞検索サービスの歌詞(テキスト)コピー禁止手法について調べてみた - 風柳メモ](http://d.hatena.ne.jp/furyu-tei/20150706/1436182102)  
+

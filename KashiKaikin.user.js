@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.9
+// @version         0.1.0.10
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -66,6 +66,9 @@ var site_infomations = [
         }
     ,   main : function(w, d, global_options, options) {
             var $ = $j;
+            
+            $( 'div#flash_area' ).find( 'img[src*="1pix.gif"]' ).css( 'display', 'none' );
+            
             $.get(
                 $('span#ipad_kashi img:first').attr('src'),
                 function(xml) {
@@ -96,6 +99,16 @@ var site_infomations = [
         }
     ,   main : function(w, d, global_options, options) {
             var $ = w.$, url = w.location.href;
+            
+            $( '.kasi_border' ).css( {
+                '-moz-user-select' : 'text',
+                '-webkit-user-select' : 'text',
+                '-ms-user-select' : 'text',
+                'user-select' : 'auto'
+            } );
+            
+            $( '.noprint' ).removeClass( 'noprint' );
+            
             $.get(
                 url.match(/^https?:\/\/kids\./) ? 'js_smt_pc.php' : 'js_smt.php',
                 {
@@ -161,6 +174,15 @@ var site_infomations = [
             };
             
             enable_selection();
+            
+            $( 'div[align="left"].noprint' )
+                .css( {
+                    '-moz-user-select' : 'text',
+                    '-webkit-user-select' : 'text',
+                    '-ms-user-select' : 'text',
+                    'user-select' : 'auto'
+                } )
+                .removeClass( 'noprint' );
         }
     }
 
@@ -186,6 +208,10 @@ var site_infomations = [
             var enable_selection = function() {
                 //$(d.body).attr('onselectstart', 'return true').attr('oncontextmenu', 'return true');
                 d.oncontextmenu = d.body.oncontextmenu = d.body.onselectstart = function() {
+                    return true;
+                };
+                
+                d.body.oncopy = function () {
                     return true;
                 };
             };
@@ -316,9 +342,9 @@ var site_infomations = [
         }
     }
 
-,   { // ■ [プチリリ - 歌詞投稿コミュニティ](http://petitlyrics.com/)
-        reg_url : '^http://petitlyrics\\.com/lyrics/.+'
-    ,   sample_url : 'http://petitlyrics.com/lyrics/1119788'
+,   { // ■ [プチリリ - 歌詞投稿コミュニティ](https://petitlyrics.com/)
+        reg_url : '^https?://petitlyrics\\.com/lyrics/.+'
+    ,   sample_url : 'https://petitlyrics.com/lyrics/1119788'
     ,   options : {
             jquery : true
         }

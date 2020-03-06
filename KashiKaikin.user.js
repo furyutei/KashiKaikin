@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.10
+// @version         0.1.0.11
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -248,7 +248,7 @@ var site_infomations = [
             //$('table[align="center"] tt').before(elm);
             */
             
-            $('body,div.lyricBody').css(global_options.CSS_ENABLE_SELECTION);
+            $('body,div.lyricBody,p').css(global_options.CSS_ENABLE_SELECTION);
         }
     }
 
@@ -378,16 +378,29 @@ var site_infomations = [
         reg_url : '^https?://www\\.musixmatch\\.com/(?:[^/]{2}/)?lyrics/[^/]+/[^/]+'
     ,   sample_url : 'https://www.musixmatch.com/ja/lyrics/%E5%8C%97%E5%AE%87%E6%B2%BB%E3%82%AB%E3%83%AB%E3%83%86%E3%83%83%E3%83%88/%E3%83%88%E3%82%A5%E3%83%83%E3%83%86%E3%82%A3'
     ,   options : {
-            jquery : false
+            jquery : true
         }
     ,   main : function(w, d, global_options, options) {
             var enable_selection = function() {
                 d.oncontextmenu = d.body.oncontextmenu = d.body.onselectstart = function() {
                     return true;
                 };
+                
+                $( 'body' ).css( global_options.CSS_ENABLE_SELECTION );
             };
             
             setInterval(enable_selection, 1000); // 一回だけだとタイミングによっては無効化されてしまう
+        }
+    }
+
+,   { // ■ [Google 検索](https://www.google.com/)
+        reg_url : '^https:\/\/(?:[^/.]*\.)?google\.[^/.]+\/search\?'
+    ,   sample_url : 'https://www.google.com/search?q=hectopascal+%E6%AD%8C%E8%A9%9E&oq=hectopa+%E6%AD%8C%E8%A9%9E'
+    ,   options : {
+            jquery : true
+        }
+    ,   main : function(w, d, global_options, options) {
+            $( '[data-lyricid]' ).css( global_options.CSS_ENABLE_SELECTION );
         }
     }
 
@@ -453,7 +466,8 @@ var load_script = function(script_url, main, options, script_id) {
     if (main) {
         if (!options) {options = {};}
         if (options.jquery) {
-            load_script('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js');
+            //load_script('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js');
+            load_script('//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js');
         }
         if (!options.suppress_common_procedure) {
             common_enable_selection();

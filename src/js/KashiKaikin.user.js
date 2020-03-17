@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.11
+// @version         0.1.0.12
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -65,7 +65,7 @@ var site_infomations = [
             jquery : false
         }
     ,   main : function(w, d, global_options, options) {
-            var $ = $j;
+            var $ = w.$j;
             
             $( 'div#flash_area' ).find( 'img[src*="1pix.gif"]' ).css( 'display', 'none' );
             
@@ -98,7 +98,7 @@ var site_infomations = [
             jquery : true
         }
     ,   main : function(w, d, global_options, options) {
-            var $ = w.$, url = w.location.href;
+            var $ = w.jQuery, url = w.location.href;
             
             $( '.kasi_border' ).css( {
                 '-moz-user-select' : 'text',
@@ -148,7 +148,7 @@ var site_infomations = [
             jquery : true
         }
     ,   main : function(w, d, global_options, options) {
-            var $ = w.$;
+            var $ = w.jQuery;
             /*
             //$.post(
             //    'http://kashinavi.com/cgi-bin/kashi.cgi',
@@ -363,7 +363,7 @@ var site_infomations = [
                     var lyrics = [];
                     
                     $.each( encoded_lyrics_infos, function( index, encoded_lyrics_info ) {
-                        lyrics.push( Base64.decode( encoded_lyrics_info.lyrics ) );
+                        lyrics.push( w.Base64.decode( encoded_lyrics_info.lyrics ) );
                     } );
                     var elm = $('<pre/>');
                     elm.text( lyrics.join( '\n' ) ).css( global_options.CSS_KASHI );
@@ -423,7 +423,7 @@ var call_main = function(w, d, main, global_options, options) {
     if (!options) {options = {};}
     
     var is_jquery_valid = function() {
-        var $ = w.$;
+        var $ = w.jQuery;
         return ($ && $.fn && $.fn.jquery);
     };  //  end of is_jquery_valid
     
@@ -440,7 +440,7 @@ var call_main = function(w, d, main, global_options, options) {
     }
     
     var check = function() {
-        var $ = w.$;
+        var $ = w.jQuery;
         if (is_jquery_valid()) {
             do_main();
             return;

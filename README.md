@@ -1,5 +1,5 @@
-KashiKaikin
-===========
+[KashiKaikin](https://github.com/furyutei/KashiKaikin)
+======================================================
 【歌詞解禁】 歌詞検索サービスの歌詞テキストコピーを可能に  
 - License: The MIT license  
 - Copyright (c) 2015 風柳(furyu)  
@@ -22,7 +22,7 @@ KashiKaikin
 ---
 [Tampermonkey](http://tampermonkey.net/)を入れたブラウザで、  
 
-> [KashiKaikin.user.js](https://furyutei.github.io/KashiKaikin/KashiKaikin.user.js)  
+> [KashiKaikin.user.js](https://furyutei.github.io/KashiKaikin/src/js/KashiKaikin.user.js)  
 
 をクリックし、指示に従ってインストール。  
 

@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.13
+// @version         0.1.0.14
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -400,13 +400,68 @@ var site_infomations = [
     }
 
 ,   { // ■ [Google 検索](https://www.google.com/)
-        reg_url : '^https:\/\/(?:[^/.]*\.)?google\.[^/.]+\/search\?'
-    ,   sample_url : 'https://www.google.com/search?q=hectopascal+%E6%AD%8C%E8%A9%9E&oq=hectopa+%E6%AD%8C%E8%A9%9E'
+        reg_url : '^https://(?:[^/.]*\\.)?google\\.[^/.]+/search\\?'
+    //,   sample_url : 'https://www.google.com/search?q=hectopascal+%E6%AD%8C%E8%A9%9E&oq=hectopa+%E6%AD%8C%E8%A9%9E'
+    ,   sample_url : 'https://www.google.com/search?q=captain+of+the+ship+%E6%AD%8C%E8%A9%9E'
     ,   options : {
             jquery : true
         }
     ,   main : function(w, d, global_options, options) {
             $( '[data-lyricid]' ).css( global_options.CSS_ENABLE_SELECTION );
+        }
+    }
+
+,   { // ■ [nana スマホでつながる音楽コラボアプリ](https://nana-music.com/)
+        reg_url : '^https://nana-music\.com/.*'
+    ,   sample_url : 'https://nana-music.com/songs/31369'
+    ,   options : {
+            jquery : true
+        }
+    ,   main : function(w, d, global_options, options) {
+            var enable_selection = function() {
+                    var $target = $( '#main .lyric__section' ),
+                        touched_classname = global_options.NAME_SCRIPT + '-touched';
+                    
+                    if ( ( $target.length <= 0 ) || $target.hasClass( touched_classname ) ) return;
+                    $target.css( global_options.CSS_ENABLE_SELECTION ).addClass( touched_classname );
+                },
+                
+                observer =  new MutationObserver( function ( records ) {
+                    stop_observe();
+                    enable_selection();
+                    start_observe();
+                } ),
+                
+                start_observe = function () { observer.observe( d.body, { childList : true, subtree : true } ); },
+                stop_observe = function () { observer.disconnect(); };
+            
+            start_observe();
+        }
+    }
+
+,   { // ■ [ROCK LYRIC ロック特化型無料歌詞検索サービス](https://rocklyric.jp/)
+        reg_url : '^https://rocklyric\.jp/.*'
+    ,   sample_url : 'https://rocklyric.jp/lyric.php?sid=137800'
+    ,   options : {
+            jquery : true
+        }
+    ,   main : function(w, d, global_options, options) {
+            var enable_selection = function() {
+                    var $target = $( '#lyric_area' ),
+                        touched_classname = global_options.NAME_SCRIPT + '-touched';
+                    
+                    if ( ( $target.length <= 0 ) || $target.hasClass( touched_classname ) ) return;
+                    $( '*[oncopy]').removeAttr( 'oncopy' );
+                    $( '*[oncut]').removeAttr( 'oncut' );
+                    $( '*[onselectstart]').removeAttr( 'onselectstart' );
+                    $( '*[oncontextmenu]').removeAttr( 'oncontextmenu' );
+                    $( '*[unselectable]').removeAttr( 'unselectable' );
+                    $target.removeAttr( 'onmousemove' );
+                    $target.removeAttr( 'onmousedown' );
+                    $target.css( global_options.CSS_ENABLE_SELECTION ).addClass( touched_classname );
+                };
+            
+            enable_selection();
         }
     }
 

@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.15
+// @version         0.1.0.16
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -71,33 +71,44 @@ var site_infomations = [
             jquery : false
         }
     ,   main : function(w, d, global_options, options) {
-            var $ = w.$j;
+            /*
+            //var $ = w.$j;
+            //
+            //$( 'div#flash_area' ).find( 'img[src*="1pix.gif"]' ).css( 'display', 'none' );
+            //
+            //$.get(
+            //    $('span#ipad_kashi img:first').attr('src'),
+            //    function(xml) {
+            //        var chunks = [], elm = $('<pre/>');
+            //        $(xml).find('text').each(function() {
+            //            chunks.push($(this).text());
+            //        });
+            //        elm.text(chunks.join('\n')).css(global_options.CSS_KASHI);
+            //        $('p#flash_area').before(elm);
+            //    },
+            //    'xml'
+            //);
+            //
+            //var enable_selection = function() {
+            //    $(d.body).unbind('contextmenu copy cut selectstart');
+            //    $('#over_flash').css({'pointer-events':'none'});
+            //};
+            //
+            //setInterval(enable_selection, 1000); // 一回だけだとタイミングによっては無効化されてしまう
+            */
+            var $ = w.jQuery,
+                event_types = 'contextmenu copy cut selectstart',
+                event_type_list = event_types.split(' ');
             
-            if ((typeof noCopyElem != 'undefined') && (typeof noCopy == 'function')) {
-                ['contextmenu', 'copy', 'cut', 'selectstart'].map(function(event_type){return noCopyElem.removeEventListener(event_type, noCopy)});
+            if (w.noCopyElem && (typeof w.noCopy == 'function')) {
+                event_type_list.map(function(event_type){return w.noCopyElem.removeEventListener(event_type, w.noCopy);});
             }
+            else {
+                event_type_list.map(function(event_type){return (w.noCopyElem||d.body).addEventListener(event_type, function(event){event.stopPropagation();}, true);});
+            }
+            if (! $) return;
             
-            $( 'div#flash_area' ).find( 'img[src*="1pix.gif"]' ).css( 'display', 'none' );
-            
-            $.get(
-                $('span#ipad_kashi img:first').attr('src'),
-                function(xml) {
-                    var chunks = [], elm = $('<pre/>');
-                    $(xml).find('text').each(function() {
-                        chunks.push($(this).text());
-                    });
-                    elm.text(chunks.join('\n')).css(global_options.CSS_KASHI);
-                    $('p#flash_area').before(elm);
-                },
-                'xml'
-            );
-            
-            var enable_selection = function() {
-                $(d.body).unbind('contextmenu copy cut selectstart');
-                $('#over_flash').css({'pointer-events':'none'});
-            };
-            
-            setInterval(enable_selection, 1000); // 一回だけだとタイミングによっては無効化されてしまう
+            $(w.noCopyElem || d.body).unbind(event_types);
         }
     }
 

@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.16
+// @version         0.1.0.17
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -473,6 +473,28 @@ var site_infomations = [
                     $( '*[unselectable]').removeAttr( 'unselectable' );
                     $target.removeAttr( 'onmousemove' );
                     $target.removeAttr( 'onmousedown' );
+                    $target.css( global_options.CSS_ENABLE_SELECTION ).addClass( touched_classname );
+                };
+            
+            enable_selection();
+        }
+    }
+
+,   { // ■ [ORICON NEWS｜最新情報を発信する総合トレンドメディア](https://www.oricon.co.jp/)
+        reg_url : '^https://(www\.)?oricon\.co\.jp/prof/\\d+/lyrics/.*'
+    ,   sample_url : 'https://www.oricon.co.jp/prof/237438/lyrics/I004440/'
+    ,   options : {
+            jquery : true
+        }
+    ,   main : function(w, d, global_options, options) {
+            var enable_selection = function() {
+                    var $target = $( '.all-lyrics' ),
+                        touched_classname = global_options.NAME_SCRIPT + '-touched';
+                    
+                    if ( ( $target.length <= 0 ) || $target.hasClass( touched_classname ) ) return;
+                    $target.removeAttr( 'oncontextmenu' );
+                    $target.removeAttr( 'onmousedown' );
+                    $target.removeAttr( 'onselectstart' );
                     $target.css( global_options.CSS_ENABLE_SELECTION ).addClass( touched_classname );
                 };
             

@@ -31,7 +31,7 @@
 ---
 対応しているサービスにて歌詞を表示すると、歌詞テキストが選択・コピー可能となります。  
 
-※ 2021.05.04 現在の対応サービス  
+※ 2022.02.05 現在の対応サービス  
 - [歌詞検索サービス　歌ネット](http://www.uta-net.com/)  
 - [うたまっぷ 歌詞を無料で検索表示](http://www.utamap.com/)  
 - [歌詞検索サービス 歌詞ＧＥＴ](http://www.kget.jp/)  
@@ -49,6 +49,8 @@
 - [nana スマホでつながる音楽コラボアプリ](https://nana-music.com/)
 - [ROCK LYRIC ロック特化型無料歌詞検索サービス](https://rocklyric.jp/)
 - [ORICON NEWS｜最新情報を発信する総合トレンドメディア](https://www.oricon.co.jp/)
+- [KKBOX - 1ヶ月無料で楽しめる聴き放題音楽アプリ - KKBOX](https://www.kkbox.com/jp/ja/)
+- [AZLyrics - Song Lyrics from A to Z](https://www.azlyrics.com/)
 
 ■ 関連記事
 ---

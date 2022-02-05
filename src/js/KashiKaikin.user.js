@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.17
+// @version         0.1.0.18
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -496,6 +496,39 @@ var site_infomations = [
                     $target.removeAttr( 'onmousedown' );
                     $target.removeAttr( 'onselectstart' );
                     $target.css( global_options.CSS_ENABLE_SELECTION ).addClass( touched_classname );
+                };
+            
+            enable_selection();
+        }
+    }
+
+,   { // ■ [KKBOX - 1ヶ月無料で楽しめる聴き放題音楽アプリ - KKBOX](https://www.kkbox.com/jp/ja/)
+        reg_url : '^https://(www\.)?kkbox\.com/.*?/song/.*'
+    ,   sample_url : 'https://www.kkbox.com/jp/ja/song/pUM8-22WpEL4vzV34vzV30PL-index.html'
+    ,   options : {
+            jquery : true
+        }
+    ,   main : function(w, d, global_options, options) {
+            var touched_classname = global_options.NAME_SCRIPT + '-touched',
+                enable_selection = function() {
+                    $( document.body ).removeAttr( 'oncontextmenu' );
+                    $( '.lyrics' ).css( global_options.CSS_ENABLE_SELECTION ).addClass( touched_classname );
+                };
+            
+            enable_selection();
+        }
+    }
+
+,   { // ■ [AZLyrics - Song Lyrics from A to Z](https://www.azlyrics.com/)
+        reg_url : '^https://(www\.)?azlyrics\.com/lyrics/.*'
+    ,   sample_url : 'https://www.azlyrics.com/lyrics/queen/wewillrockyou.html'
+    ,   options : {
+            jquery : true
+        }
+    ,   main : function(w, d, global_options, options) {
+            var touched_classname = global_options.NAME_SCRIPT + '-touched',
+                enable_selection = function() {
+                    $( document.body ).css( global_options.CSS_ENABLE_SELECTION ).addClass( touched_classname );
                 };
             
             enable_selection();

@@ -2,7 +2,7 @@
 // @name            KashiKaikin
 // @namespace       http://d.hatena.ne.jp/furyu-tei
 // @author          furyu
-// @version         0.1.0.19
+// @version         0.1.0.20
 // @include         http://*
 // @include         https://*
 // @description     歌詞検索サイトの歌詞テキストをコピー可能にする
@@ -284,9 +284,9 @@ var site_infomations = [
             var lyric_body = $('div.lyricBody div.medium').clone(true), elm = $('<pre/>');
             lyric_body.find('span.rt').remove();
             elm.text($.trim(lyric_body.text().replace(/(?:^ +| +$)/gm, ''))).css(global_options.CSS_KASHI);
-            $('div.lyric__body').before(elm);
-            
-            $('body,div.lyricBody').css(global_options.CSS_ENABLE_SELECTION);
+            //$('div.lyric__body').before(elm);
+            $('div.lyricBody').before(elm);
+            $('body,div.lyricBody').css(global_options.CSS_ENABLE_SELECTION).removeAttr('oncopy onselectstart oncontextmenu unselectable');
         }
     }
 
